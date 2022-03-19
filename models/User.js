@@ -11,11 +11,16 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: //Regex to VALIDATE email
+    // match: //Regex to VALIDATE email
   },
-thoughts: [{
-    type: Schema.Types.ObjectId,
-    ref: "Thought",
-}]
-
+  thoughts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Thought",
+    },
+  ],
 });
+
+const User = model("User", UserSchema);
+
+module.exports = User;
