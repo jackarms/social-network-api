@@ -11,6 +11,7 @@ const userController = {
   },
   getUserById({ params }, res) {
     User.findOne({ _id: params.id })
+      //select and populate friends and thoughts
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this ID." });
@@ -29,7 +30,7 @@ const userController = {
       .catch((err) => res.status(400).json(err));
   },
   updateUser({ params, body }, res) {
-    User.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    User.findOneAndUpdate({ _id: params.id }, { $set: body }, { new: true })
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this ID." });
@@ -50,4 +51,10 @@ const userController = {
       })
       .catch((err) => res.status(400).json(err));
   },
+
+  //addFriend
+
+  //deleteFriend
 };
+
+module.exports = userController;
